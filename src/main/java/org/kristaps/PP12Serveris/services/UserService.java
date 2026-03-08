@@ -1,10 +1,23 @@
 package org.kristaps.PP12Serveris.services;
 
+import java.security.InvalidKeyException;
+import java.security.Key;
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.KeyGenerator;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
+
+import org.kristaps.PP12Serveris.models.ShopModel;
 import org.kristaps.PP12Serveris.models.UserModel;
+import org.kristaps.PP12Serveris.repository.ShopRepository;
 import org.kristaps.PP12Serveris.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -12,13 +25,28 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final ShopRepository shopRepository;
 
     // ManyToOne, OneToMany, ManyToMany, OneToOne
     // Functional interface - lambda, stream, filter, map, reduce, forEach,
     // anonymous class
 
-    public Long createUser(UserModel user) {
-        user.getHobbies().forEach(hobby -> hobby.setUser(user));
+    public Long createUser(UserModel user) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
+            IllegalBlockSizeException, BadPaddingException {
+        user.setEmail(user.getEmail().toLowerCase());
+
+        /*
+         * KeyGenerator keyGen = KeyGenerator.getInstance("AES");
+         * keyGen.init(256);
+         * SecretKey secretKey = keyGen.generateKey();
+         * System.out.println("Generated key: " + secretKey);
+         * 
+         * Cipher cipher = Cipher.getInstance("AES");
+         * cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+         * byte[] encryptedPassword = cipher.doFinal(user.getPassword().getBytes());
+         * user.setPassword(new String(encryptedPassword));
+         */
+
         UserModel savedUser = userRepository.save(user);
         return savedUser.getId();
 
@@ -28,17 +56,16 @@ public class UserService {
         return userRepository.existsByEmail(email);
     }
 
-    public UserModel getUserById(Long userID) {
-        UserModel useris = userRepository.findById(userID).orElse(null);
-        System.out.println(useris);
-        return useris;
+    public Long signIn(UserModel user) {
+        UserModel foundUser = userRepository.findByEmail(user.getEmail().toLowerCase());
+        if (!foundUser.getPassword().equals(user.getPassword())) {
+            return null;
+        }
+        return foundUser.getId();
     }
 
-    public UserModel deleteUserById(Long userID) {
-        UserModel useris = userRepository.findById(userID).orElse(null);
-        if (useris != null) {
-            userRepository.deleteById(userID);
-        }
-        return useris;
+    public List<ShopModel> getAllAutos() {
+        return shopRepository.findAll();
     }
+
 }
