@@ -25,7 +25,6 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final ShopRepository shopRepository;
 
     // ManyToOne, OneToMany, ManyToMany, OneToOne
     // Functional interface - lambda, stream, filter, map, reduce, forEach,
@@ -62,10 +61,6 @@ public class UserService {
             return null;
         }
         return foundUser.getId();
-    }
-
-    public List<ShopModel> getAllAutos() {
-        return shopRepository.findAll();
     }
 
 }

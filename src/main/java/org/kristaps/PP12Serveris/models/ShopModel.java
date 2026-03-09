@@ -21,5 +21,6 @@ public class ShopModel {
     private String color;
     private Integer milage;
     private Double price;
+    private Integer quantity;
 
 }

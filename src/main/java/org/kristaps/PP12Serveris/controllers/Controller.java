@@ -56,8 +56,4 @@ public class Controller {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(-1L);
     }
 
-    @GetMapping("/api/v1/getallautos")
-    public ResponseEntity<List<ShopModel>> findAllAutos() {
-        return ResponseEntity.ok(userService.getAllAutos());
-    }
 }
