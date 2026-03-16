@@ -26,4 +26,12 @@ public class ShopService {
         ShopModel newAuto = shopRepository.save(shopModel);
         return newAuto.getId() != null;
     }
+
+    public boolean updateAuto(Long id, ShopModel shopModel) {
+        if (!shopRepository.existsById(id))
+            return false;
+        shopModel.setId(id);
+        shopRepository.save(shopModel);
+        return true;
+    }
 }
