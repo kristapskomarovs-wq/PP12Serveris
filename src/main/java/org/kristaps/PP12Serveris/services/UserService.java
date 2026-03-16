@@ -1,20 +1,13 @@
 package org.kristaps.PP12Serveris.services;
 
 import java.security.InvalidKeyException;
-import java.security.Key;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
 
 import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
-import javax.crypto.SecretKey;
 
-import org.kristaps.PP12Serveris.models.ShopModel;
 import org.kristaps.PP12Serveris.models.UserModel;
-import org.kristaps.PP12Serveris.repository.ShopRepository;
 import org.kristaps.PP12Serveris.repository.UserRepository;
 import org.springframework.stereotype.Service;
 

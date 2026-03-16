@@ -34,4 +34,11 @@ public class ShopService {
         shopRepository.save(shopModel);
         return true;
     }
+
+    public boolean deleteAuto(Long id) {
+        if (!shopRepository.existsById(id))
+            return false;
+        shopRepository.deleteById(id);
+        return true;
+    }
 }
