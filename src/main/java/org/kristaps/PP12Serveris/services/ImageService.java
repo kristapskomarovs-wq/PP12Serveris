@@ -18,7 +18,7 @@ public class ImageService {
 
     private final ShopService shopService;
 
-    String uploadDir = "C:\\Users\\krist\\OneDrive\\Desktop\\RigaCoding\\PP12_Serveris\\PP12Serveris\\bildes";
+    String uploadDir = System.getProperty("user.dir") + "/bildes";
 
     public String uploadImage(MultipartFile file, Long id) {
         try {
