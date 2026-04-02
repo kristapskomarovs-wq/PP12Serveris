@@ -5,7 +5,7 @@ import java.util.Map;
 import org.kristaps.PP12Serveris.services.ImageService;
 import org.springframework.core.io.Resource;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,10 +15,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
 
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*", methods = {
-        org.springframework.web.bind.annotation.RequestMethod.GET,
-        org.springframework.web.bind.annotation.RequestMethod.POST,
-        org.springframework.web.bind.annotation.RequestMethod.OPTIONS })
 @RestController
 @RequiredArgsConstructor
 public class ImageController {

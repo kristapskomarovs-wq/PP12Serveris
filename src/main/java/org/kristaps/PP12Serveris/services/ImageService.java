@@ -1,4 +1,5 @@
 package org.kristaps.PP12Serveris.services;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -15,13 +16,17 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import lombok.RequiredArgsConstructor;
 
+
 @Service
 @RequiredArgsConstructor
 public class ImageService {
 
     private final ShopRepository shopRepository;
 
-    String uploadDir = System.getProperty("user.dir") + "/bildes";
+    @Value("${app.upload-dir}")
+    private String uploadDir;
+
+    // String uploadDir = System.getProperty("user.dir") + "/bildes";
 
     public String uploadImage(MultipartFile file, Long id) {
         try {

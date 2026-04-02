@@ -18,8 +18,4 @@ public class UserModel {
     private String email;
     private String password;
 
-    public void tolowerCase() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'tolowerCase'");
-    }
 }
